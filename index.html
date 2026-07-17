@@ -1025,7 +1025,8 @@
                 { value: "thank", label: "谢谢你的坦诚", response: "能和你坦诚相待，是我最大的幸运" },
                 { value: "friend", label: "我们还是朋友", response: "无论何时，你都可以找我倾诉" },
                 { value: "goodbye", label: "愿各自安好", response: "愿我们都能在各自的路上，成为更好的人" },
-                { value: "reply", label: "想回一封信", response: "期待收到你的回信" }
+                { value: "reply", label: "想回一封信", response: "期待收到你的回信" },
+                { value: "none", label: "没有", response: "没关系，我理解" }
             ],
             placeholder: "有什么想对我说的吗……",
             submitText: "确定"
@@ -1541,7 +1542,7 @@
             } else if (currentSectionIndex === STORY.length) {
                 showInteraction();
             } else if (currentSectionIndex === STORY.length + 1) {
-                showResponse();
+                return;
             } else if (currentSectionIndex === STORY.length + 2) {
                 showMusicSection();
             } else if (currentSectionIndex === STORY.length + 3) {
