@@ -466,6 +466,30 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
+        .music-divider {
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #ddd, transparent);
+            margin: 40px auto;
+        }
+
+        .play-btn {
+            padding: 12px 30px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .play-btn:hover {
+            background: #ee5a5a;
+            transform: scale(1.05);
+        }
+
         .music-hint {
             font-size: 16px;
             color: #aaa;
@@ -679,6 +703,16 @@
                     <source src="music/给我一首歌的时间-周杰伦.mp3" type="audio/mpeg">
                 </audio>
             </div>
+            <div class="music-divider"></div>
+            
+            <div class="music-title">后来的我们</div>
+            <div class="music-artist">五月天</div>
+            <div class="music-player">
+                <audio id="mayday-music" controls preload="metadata">
+                    <source src="music/后来的我们-五月天.mp3" type="audio/mpeg">
+                
+            </div>
+            
             <div class="music-hint">点击屏幕继续...</div>
         </div>
 
@@ -1050,6 +1084,8 @@
         const interactionSection = document.getElementById('interaction-section');
         const musicSection = document.getElementById('music-section');
         const jayMusic = document.getElementById('jay-music');
+        const maydayMusic = document.getElementById('mayday-music');
+        const maydayPlayBtn = document.getElementById('mayday-play-btn');
         const interactionTitle = document.getElementById('interaction-title');
         const optionsContainer = document.getElementById('options-container');
         const messageInput = document.getElementById('message-input');
@@ -1527,6 +1563,9 @@
             if (jayMusic) {
                 jayMusic.pause();
             }
+            if (maydayMusic) {
+                maydayMusic.pause();
+            }
             currentSectionIndex = STORY.length + 2;
             responseSection.classList.add('active');
         }
@@ -1568,6 +1607,10 @@
             if (jayMusic) {
                 jayMusic.pause();
                 jayMusic.currentTime = 0;
+            }
+            if (maydayMusic) {
+                maydayMusic.pause();
+                maydayMusic.currentTime = 0;
             }
             contentContainer.classList.remove('visible');
             introScreen.classList.remove('hidden');
@@ -1621,6 +1664,22 @@
                 toggleMute();
             }
         });
+
+        if (jayMusic) {
+            jayMusic.addEventListener('play', () => {
+                if (maydayMusic && !maydayMusic.paused) {
+                    maydayMusic.pause();
+                }
+            });
+        }
+
+        if (maydayMusic) {
+            maydayMusic.addEventListener('play', () => {
+                if (jayMusic && !jayMusic.paused) {
+                    jayMusic.pause();
+                }
+            });
+        }
     </script>
 </body>
 </html>
